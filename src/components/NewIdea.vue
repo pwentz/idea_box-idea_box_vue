@@ -32,6 +32,7 @@
             <div class='small-4 \
                         small-centered \
                         columns \
+                        new-idea-btn \
                         btn-container'
             >
 
@@ -47,6 +48,10 @@
 
             </div>
           </div>
+          <clear-ideas
+            :sendClear='passClear'
+          >
+          </clear-ideas>
         </div>
       </div>
     </div>
@@ -54,13 +59,17 @@
 </template>
 
 <script>
+import ClearIdeas from './ClearIdeas.vue'
 export default {
+  components: {
+    ClearIdeas
+  },
   data() {
     return {
       title: '',
       body: ''
     }
   },
-  props: ['sendInputs']
+  props: ['sendInputs', 'passClear']
 }
 </script>

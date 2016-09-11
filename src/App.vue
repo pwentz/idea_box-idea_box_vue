@@ -12,6 +12,7 @@
 
     <new-idea
       :sendInputs='handleSubmit'
+      :passClear='handleClear'
     >
     </new-idea>
 
@@ -48,7 +49,7 @@ export default {
      .fetchIdeas
      .call(this, this.apiRootUrl)
      .then(response => {
-       this.ideas = response.ideas
+       this.ideas = response.body.ideas
      })
   },
   methods: {
@@ -67,7 +68,7 @@ export default {
        .fetchIdeas
        .call(this, this.apiRootUrl)
        .then(response => {
-         this.ideas = response.ideas
+         this.ideas = response.body.ideas
        })
     },
 
@@ -98,6 +99,18 @@ export default {
        .then(response => {
          this.reloadIdeas()
        })
+    },
+
+    handleClear() {
+      let endpoint = `${this.apiRootUrl}/ideas/clear.json`
+      if (confirm('Are you sure?')) {
+        api
+         .clearAllIdeas
+         .call(this, endpoint)
+         .then(response => {
+           this.reloadIdeas()
+         })
+      }
     }
   }
 }
@@ -145,5 +158,9 @@ body h4 {
 
 .btn-container, .btn-container button {
   font-family: 'Oxygen', sans-serif;
+}
+
+.new-idea-btn button {
+  width: 100%;
 }
 </style>
