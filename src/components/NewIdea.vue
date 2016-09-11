@@ -37,7 +37,7 @@
             >
 
               <button
-                v-on:click='sendInputs(title, body)'
+                v-on:click='activateSubmit'
                 class='button \
                        success \
                        hollow'
@@ -70,6 +70,12 @@ export default {
       body: ''
     }
   },
-  props: ['sendInputs', 'passClear']
+  props: ['sendInputs', 'passClear', 'clearInputs'],
+  methods: {
+    activateSubmit() {
+      this.sendInputs(this)
+      this.clearInputs(this)
+    }
+  }
 }
 </script>
