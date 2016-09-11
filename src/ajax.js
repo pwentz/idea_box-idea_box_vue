@@ -14,6 +14,10 @@ class ajaxCalls {
   createIdea(endpoint, data) {
     return this.$http.post(endpoint, data)
   }
+
+  updateIdea(endpoint, data) {
+    return this.$http.put(endpoint, data)
+  }
 }
 
 export default ajaxCalls

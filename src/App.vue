@@ -7,6 +7,7 @@
     <ideas
       :ideas='ideas'
       :handleDelete='removeIdea'
+      :sendUpdate='handleUpdate'
     >
     </ideas>
   </div>
@@ -63,6 +64,24 @@ export default {
       let ideaData = { 'idea': { 'title': title, 'body': body } }
       api
        .createIdea
+       .call(this, endpoint, ideaData)
+       .then(response => {
+         this.reloadIdeas()
+       })
+    },
+
+    handleUpdate(id) {
+      let ideaData = event.target.textContent.trim()
+      let request = { 'idea': {} }
+      if (event.target.className === 'idea-title') request.idea.title = ideaData
+      if (event.target.className === 'idea-body') request.idea.body = ideaData
+      this.finishUpdate(id, request)
+    },
+
+    finishUpdate(id, ideaData) {
+      let endpoint = `${this.apiRootUrl}/ideas/${id}.json`
+      api
+       .updateIdea
        .call(this, endpoint, ideaData)
        .then(response => {
          this.reloadIdeas()
