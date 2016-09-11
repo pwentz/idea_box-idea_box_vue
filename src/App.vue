@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <new-idea
+      :sendInputs='handleSubmit'
+    >
+    </new-idea>
     <ideas
       :ideas='ideas'
       :handleDelete='removeIdea'
@@ -10,13 +14,15 @@
 
 <script>
 import Ideas from './components/Ideas.vue'
+import NewIdea from './components/NewIdea.vue'
 import ajaxCalls from './ajax.js'
 
 const api = new ajaxCalls()
 
 export default {
   components: {
-    Ideas
+    Ideas,
+    NewIdea
   },
   data() {
     return {
@@ -49,6 +55,17 @@ export default {
        .call(this, this.apiRootUrl)
        .then(response => {
          this.ideas = response.ideas
+       })
+    },
+
+    handleSubmit(title, body) {
+      let endpoint = `${this.apiRootUrl}/ideas.json`
+      let ideaData = { 'idea': { 'title': title, 'body': body } }
+      api
+       .createIdea
+       .call(this, endpoint, ideaData)
+       .then(response => {
+         this.reloadIdeas()
        })
     }
   }
