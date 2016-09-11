@@ -3,7 +3,9 @@
     <div v-for='idea in ideas'>
       <idea
         :idea='idea'
-        :fireDelete='handleDelete'>
+        :fireDelete='handleDelete'
+        :fireUpdate='sendUpdate'
+      >
       </idea>
     </div>
   </div>
@@ -16,6 +18,6 @@ export default {
   components: {
     Idea
   },
-  props: ['ideas', 'handleDelete']
+  props: ['ideas', 'handleDelete', 'sendUpdate']
 }
 </script>
