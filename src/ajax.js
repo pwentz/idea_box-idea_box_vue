@@ -1,10 +1,6 @@
 class ajaxCalls {
   fetchIdeas(endpoint) {
-    return this.$http.get(`${endpoint}/ideas.json`).then((response) => {
-      return response.body
-    }, (response) => {
-      return false
-    })
+    return this.$http.get(`${endpoint}/ideas.json`)
   }
 
   destroyIdea(endpoint) {
@@ -17,6 +13,10 @@ class ajaxCalls {
 
   updateIdea(endpoint, data) {
     return this.$http.put(endpoint, data)
+  }
+
+  clearAllIdeas(endpoint) {
+    return this.$http.get(endpoint)
   }
 }
 
