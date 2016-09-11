@@ -12,6 +12,7 @@
 
     <new-idea
       :sendInputs='handleSubmit'
+      :clearInputs='handleInputs'
       :passClear='handleClear'
     >
     </new-idea>
@@ -72,22 +73,32 @@ export default {
        })
     },
 
-    handleSubmit(title, body) {
+    handleSubmit(newIdea) {
       let endpoint = `${this.apiRootUrl}/ideas.json`
-      let ideaData = { 'idea': { 'title': title, 'body': body } }
-      api
-       .createIdea
-       .call(this, endpoint, ideaData)
-       .then(response => {
-         this.reloadIdeas()
-       })
+      let ideaData = { 'idea': { 'title': newIdea.title, 'body': newIdea.body } }
+      if (ideaData.idea.title && ideaData.idea.body) {
+        api
+         .createIdea
+         .call(this, endpoint, ideaData)
+         .then(response => {
+           this.reloadIdeas()
+         })
+      }
+      else {
+        alert("Idea can't be blank")
+      }
+    },
+
+    handleInputs(newIdea) {
+      newIdea.title = ''
+      newIdea.body = ''
     },
 
     handleUpdate(id) {
       let ideaData = event.target.textContent.trim()
-      let request = { 'idea': {} }
-      if (event.target.className === 'idea-title') request.idea.title = ideaData
-      if (event.target.className === 'idea-body') request.idea.body = ideaData
+      let params = { 'idea': {} }
+      if (event.target.className === 'idea-title') params.idea.title = ideaData
+      if (event.target.className === 'idea-body') params.idea.body = ideaData
       this.finishUpdate(id, request)
     },
 
