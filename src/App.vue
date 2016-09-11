@@ -1,15 +1,27 @@
 <template>
   <div id="app">
+    <div class='filler'>
+    </div>
+
+    <h1 id='header'>
+      Ideabox (with Vue.js!)
+    </h1>
+
+    <div class='filler'>
+    </div>
+
     <new-idea
       :sendInputs='handleSubmit'
     >
     </new-idea>
+
     <ideas
       :ideas='ideas'
       :handleDelete='removeIdea'
       :sendUpdate='handleUpdate'
     >
     </ideas>
+
   </div>
 </template>
 
@@ -92,7 +104,46 @@ export default {
 </script>
 
 <style>
-body {
-  font-family: Helvetica, sans-serif;
+.background {
+  background-image: url('../forest-opacity.jpg');
+  background-position: center;
+  background-attachment: fixed;
+}
+#header {
+  font-family: Pacifico;
+  text-align: center;
+  font-size: 64px;
+}
+
+body h4 {
+  text-align: center;
+}
+
+.input-filler {
+  height: 65px;
+}
+
+#new-idea {
+  background-color: #def0fc;
+  margin-bottom: 25px;
+  border: 1px solid rgba(10, 10, 10, 0.25);
+  border-radius: 12px;
+}
+
+#new-idea input {
+  font-family: 'Oxygen', sans-serif;
+}
+
+.filler {
+  height: 50px;
+}
+
+.idea-info p, .idea-info h5 {
+  text-align: center;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.btn-container, .btn-container button {
+  font-family: 'Oxygen', sans-serif;
 }
 </style>

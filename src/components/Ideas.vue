@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-for='idea in ideas'>
+    <div v-for='idea in ideas'
+         class='row'
+    >
       <idea
         :idea='idea'
         :fireDelete='handleDelete'
