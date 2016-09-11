@@ -10,6 +10,10 @@ class ajaxCalls {
   destroyIdea(endpoint) {
     return this.$http.delete(endpoint)
   }
+
+  createIdea(endpoint, data) {
+    return this.$http.post(endpoint, data)
+  }
 }
 
 export default ajaxCalls
