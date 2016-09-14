@@ -96,17 +96,22 @@ export default {
 
     handleUpdate(id) {
       let ideaData = event.target.textContent.trim()
-      let params = { 'idea': {} }
-      if (event.target.className === 'idea-title') params.idea.title = ideaData
-      if (event.target.className === 'idea-body') params.idea.body = ideaData
-      this.finishUpdate(id, request)
+      if (ideaData) {
+        let params = { 'idea': {} }
+        if (event.target.className === 'idea-title') params.idea.title = ideaData
+        if (event.target.className === 'idea-body') params.idea.body = ideaData
+        this.finishUpdate(id, params)
+      }
+      else {
+        alert("field can't be blank!")
+      }
     },
 
-    finishUpdate(id, ideaData) {
+    finishUpdate(id, params) {
       let endpoint = `${this.apiRootUrl}/ideas/${id}.json`
       api
        .updateIdea
-       .call(this, endpoint, ideaData)
+       .call(this, endpoint, params)
        .then(response => {
          this.reloadIdeas()
        })
